@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    default: "prod"
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mariadb://localhost:3306/commerce
+logging:
+  level:
+    root: "warn"
+    org.springframework.web: "debug"
+    org.hibernate: "error"
+server:
+  port: 8080
