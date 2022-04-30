@@ -9,6 +9,10 @@ spring:
     username: root
     password: root
     url: jdbc:mariadb://localhost:3306/commerce
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
 logging:
   level:
     root: "info"
