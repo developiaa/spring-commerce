@@ -1,7 +1,7 @@
 spring:
   config:
     activate:
-      on-profile: local
+      on-profile: live
   application:
     name: commerce-api
   datasource:
@@ -15,4 +15,4 @@ logging:
     org.springframework.web: "debug"
     org.hibernate: "error"
 server:
-  port: 8081
+  port: 8080

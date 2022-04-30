@@ -1,6 +1,9 @@
 spring:
-  profiles:
-    default: "dev"
+  config:
+    activate:
+      on-profile: dev
+  application:
+    name: commerce-api
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
@@ -8,8 +11,8 @@ spring:
     url: jdbc:mariadb://localhost:3306/commerce
 logging:
   level:
-    root: "warn"
+    root: "info"
     org.springframework.web: "debug"
     org.hibernate: "error"
 server:
-  port: 8080
+  port: 8082
