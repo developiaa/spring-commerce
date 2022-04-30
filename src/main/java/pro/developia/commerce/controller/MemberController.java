@@ -1,6 +1,7 @@
 package pro.developia.commerce.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public String createMember(@RequestBody MemberCreateRequest memberCreateRequest) {
+    public String createMember(@RequestBody @Validated MemberCreateRequest memberCreateRequest) {
         memberService.createMember(memberCreateRequest);
         return "success";
     }
