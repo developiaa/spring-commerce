@@ -1,9 +1,11 @@
 package pro.developia.commerce.domain.product;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pro.developia.commerce.domain.common.BaseTime;
+import pro.developia.commerce.dto.request.product.ProductCreateRequest;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,4 +35,23 @@ public class Product extends BaseTime {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductCategory> productCategoryList = new ArrayList<>();
+
+    @Builder
+    public Product(String name, Integer stock, Integer price, ProductStatus status) {
+        this.name = name;
+        this.stock = stock;
+        this.price = price;
+        this.status = status;
+    }
+
+    @Builder
+    public static Product createProduct(ProductCreateRequest productCreateRequest) {
+        return Product.builder()
+                .name(productCreateRequest.getName())
+                .stock(productCreateRequest.getStock())
+                .price(productCreateRequest.getPrice())
+                .status(productCreateRequest.getStatus())
+                .build();
+    }
+
 }
