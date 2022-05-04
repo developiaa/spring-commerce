@@ -1,4 +1,4 @@
-package pro.developia.commerce.controller;
+package pro.developia.commerce.controller.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

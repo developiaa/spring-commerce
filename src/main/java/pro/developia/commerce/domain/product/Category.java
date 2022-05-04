@@ -8,6 +8,7 @@ import pro.developia.commerce.domain.common.BaseTime;
 import pro.developia.commerce.dto.request.product.CategoryCreateRequest;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Entity
@@ -19,6 +20,9 @@ public class Category extends BaseTime {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private List<Product> productList;
 
     @Builder
     public Category(String name) {

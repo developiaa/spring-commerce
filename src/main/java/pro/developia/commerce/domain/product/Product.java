@@ -1,5 +1,6 @@
 package pro.developia.commerce.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,24 +34,32 @@ public class Product extends BaseTime {
     @Column(name = "status")
     private ProductStatus status;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_id")
+    private Category category;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductCategory> productCategoryList = new ArrayList<>();
 
     @Builder
-    public Product(String name, Integer stock, Integer price, ProductStatus status) {
+    public Product(String name, Integer stock, Integer price, ProductStatus status,
+                   Category category) {
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.status = status;
+        this.category = category;
     }
 
     @Builder
-    public static Product createProduct(ProductCreateRequest productCreateRequest) {
+    public static Product createProduct(ProductCreateRequest productCreateRequest, Category category) {
         return Product.builder()
                 .name(productCreateRequest.getName())
                 .stock(productCreateRequest.getStock())
                 .price(productCreateRequest.getPrice())
                 .status(productCreateRequest.getStatus())
+                .category(category)
                 .build();
     }
 
