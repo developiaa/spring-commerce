@@ -30,9 +30,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts(Long id) {
-        Category category = categoryRepository.findById(id).get();
-        return productRepository.findAllByCategory(category);
+    public List<Product> getProductsByCategoryId(Long categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElse(null);
+        return productRepository.findProductByCategory(category);
     }
 
 }

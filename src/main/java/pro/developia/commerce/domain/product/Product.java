@@ -39,8 +39,8 @@ public class Product extends BaseTime {
     @JoinColumn(name="category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductCategory> productCategoryList = new ArrayList<>();
+//    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+//    private List<ProductCategory> productCategoryList = new ArrayList<>();
 
     @Builder
     public Product(String name, Integer stock, Integer price, ProductStatus status,
