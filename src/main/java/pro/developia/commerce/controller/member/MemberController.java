@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pro.developia.commerce.core.ApiResult;
 import pro.developia.commerce.dto.request.member.MemberCreateRequest;
 import pro.developia.commerce.service.member.MemberService;
 
@@ -16,8 +17,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    public String createMember(@RequestBody @Validated MemberCreateRequest memberCreateRequest) {
+    public ApiResult<Void> createMember(@RequestBody @Validated MemberCreateRequest memberCreateRequest) {
         memberService.createMember(memberCreateRequest);
-        return "success";
+        return ApiResult.ok();
     }
 }

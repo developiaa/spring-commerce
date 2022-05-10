@@ -3,6 +3,7 @@ package pro.developia.commerce.controller.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import pro.developia.commerce.core.ApiResult;
 import pro.developia.commerce.domain.product.Product;
 import pro.developia.commerce.dto.request.product.CategoryCreateRequest;
 import pro.developia.commerce.service.product.CategoryService;
@@ -18,13 +19,13 @@ public class CategoryController {
     private final ProductService productService;
 
     @PostMapping
-    public String createCategory(@RequestBody @Validated CategoryCreateRequest categoryCreateRequest) {
+    public ApiResult<Void> createCategory(@RequestBody @Validated CategoryCreateRequest categoryCreateRequest) {
         categoryService.createCategory(categoryCreateRequest);
-        return "success";
+        return ApiResult.ok();
     }
 
     @GetMapping("/{id}")
-    public List<Product> getProducts(@PathVariable Long id) {
-        return productService.getProductsByCategoryId(id);
+    public ApiResult<List<Product>> getProducts(@PathVariable Long id) {
+        return ApiResult.ok(productService.getProductsByCategoryId(id));
     }
 }

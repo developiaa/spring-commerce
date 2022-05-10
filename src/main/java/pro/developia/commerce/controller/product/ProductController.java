@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pro.developia.commerce.core.ApiResult;
 import pro.developia.commerce.dto.request.product.ProductCreateRequest;
 import pro.developia.commerce.service.product.ProductService;
 
@@ -16,9 +17,9 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping
-    public String createProduct(@RequestBody @Validated ProductCreateRequest productCreateRequest) {
+    public ApiResult<Void> createProduct(@RequestBody @Validated ProductCreateRequest productCreateRequest) {
         productService.createProduct(productCreateRequest);
-        return "success";
+        return ApiResult.ok();
     }
 
 }
