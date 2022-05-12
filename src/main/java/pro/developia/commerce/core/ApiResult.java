@@ -1,8 +1,9 @@
 package pro.developia.commerce.core;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZoneId;
@@ -20,6 +21,8 @@ public class ApiResult<T> {
 
     private T message;
 
+    @JsonIgnore
+    private HttpStatus httpStatus;
 
     public ApiResult<T> code(@NotNull Code code) {
         this.code = code;
@@ -28,6 +31,11 @@ public class ApiResult<T> {
 
     public ApiResult<T> message(T message) {
         this.message = message;
+        return this;
+    }
+
+    public ApiResult<T> httpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
         return this;
     }
 
@@ -40,7 +48,7 @@ public class ApiResult<T> {
     }
 
     public static <T> ApiResult<T> ok(T data, T message) {
-        return with(data).code(Code.SUCCESS).message(message);
+        return with(data).code(Code.SUCCESS).message(message).httpStatus(HttpStatus.OK);
     }
 
     public static <T> ApiResult<T> with(T data) {
@@ -48,5 +56,17 @@ public class ApiResult<T> {
         result.data = data;
         result.time = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
         return result;
+    }
+
+    public static <T> ApiResult<T> fail(Code code) {
+        return with((T) null).code(code).httpStatus(code.getHttpStatus());
+    }
+
+    public static <T> ApiResult<T> fail(Code code, T message) {
+        return with((T) null).code(code).message(message).httpStatus(code.getHttpStatus());
+    }
+
+    public static <T> ApiResult<T> fail(Code code, T message, HttpStatus httpStatus) {
+        return with((T) null).code(code).message(message).httpStatus(httpStatus);
     }
 }

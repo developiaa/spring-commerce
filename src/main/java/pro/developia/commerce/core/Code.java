@@ -9,6 +9,7 @@ public enum Code {
     UNAUTHENTICATED(3, HttpStatus.UNAUTHORIZED, "unauthenticated"),
     UNAUTHORIZED(4, HttpStatus.FORBIDDEN, "forbidden"),
     NOT_FOUND(5, HttpStatus.NOT_FOUND, "not_found"),
+    INTERNAL_SERVER_ERROR(6, HttpStatus.INTERNAL_SERVER_ERROR, "internal_server_error"),
     TIMEOUT(990, HttpStatus.REQUEST_TIMEOUT, "timeout");
 
     private Integer id;
@@ -21,4 +22,7 @@ public enum Code {
         this.message = message;
     }
 
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 }

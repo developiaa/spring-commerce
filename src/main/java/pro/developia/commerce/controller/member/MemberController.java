@@ -19,6 +19,10 @@ public class MemberController {
     @PostMapping
     public ApiResult<Void> createMember(@RequestBody @Validated MemberCreateRequest memberCreateRequest) {
         memberService.createMember(memberCreateRequest);
+        if (memberCreateRequest.getName().equals("kj")) {
+            throw new NullPointerException();
+        }
+
         return ApiResult.ok();
     }
 }

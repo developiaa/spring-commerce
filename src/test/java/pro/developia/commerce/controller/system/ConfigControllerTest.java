@@ -11,6 +11,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import pro.developia.commerce.controller.ExceptionController;
+import pro.developia.commerce.core.GlobalExceptionHandler;
 
 import javax.transaction.Transactional;
 
@@ -23,6 +25,12 @@ class ConfigControllerTest {
     @Autowired
     ConfigController configController;
 
+    @Autowired
+    ExceptionController exceptionController;
+
+    @Autowired
+    GlobalExceptionHandler globalExceptionHandler;
+
     private MockMvc mockMvc;
 
     @Value("${spring.profiles.active}")
@@ -31,12 +39,15 @@ class ConfigControllerTest {
     @Value("${spring.application.name}")
     private String APPLICATION_NAME;
 
+    public static String API_URL = "/v1/api/config";
+
+
     @Test
     @DisplayName("서버가 어떤 환경으로 구동됐는지 확인한다.")
     public void checkProfile() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(configController).build();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/config/profiles-active"))
+        mockMvc.perform(MockMvcRequestBuilders.get(API_URL + "/profiles-active"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(PROFILES_ACTIVE))
@@ -48,10 +59,23 @@ class ConfigControllerTest {
     public void checkApplicationName() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(configController).build();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/config/application-name"))
+        mockMvc.perform(MockMvcRequestBuilders.get(API_URL + "/application-name"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(APPLICATION_NAME))
+        ;
+    }
+
+    @Test
+    @DisplayName("예외가 발생하는 경우 global handler에서 처리되는지 확인한다.")
+    public void checkGlobalHandler() throws Exception{
+        mockMvc = MockMvcBuilders.standaloneSetup(exceptionController)
+                .setControllerAdvice(globalExceptionHandler)
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/test/exception/1"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isInternalServerError())
         ;
     }
 
