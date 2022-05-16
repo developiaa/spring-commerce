@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import javax.validation.constraints.NotNull;
 import java.time.ZoneId;
@@ -68,5 +69,9 @@ public class ApiResult<T> {
 
     public static <T> ApiResult<T> fail(Code code, T message, HttpStatus httpStatus) {
         return with((T) null).code(code).message(message).httpStatus(httpStatus);
+    }
+
+    public ResponseEntity createResponseEntity() {
+        return ResponseEntity.status(this.httpStatus).body(this);
     }
 }
