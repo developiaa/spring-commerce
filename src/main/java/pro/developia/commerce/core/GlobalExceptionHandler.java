@@ -10,6 +10,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(ApiException.class)
+    public ResponseEntity<ApiResult<String>> handlerApiException(ApiException e) {
+        Code code = e.getCode();
+        String message = e.getMessage();
+        HttpStatus httpStatus = e.getHttpStatus();
+        return new ResponseEntity<>(ApiResult.fail(code, message), httpStatus);
+    }
+
     @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<ApiResult<String>> handleNullPointerException(final NullPointerException e) {
         log.error("handleNullPointerException : {}", e.getMessage());

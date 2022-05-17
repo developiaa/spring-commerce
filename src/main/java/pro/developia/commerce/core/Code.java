@@ -1,28 +1,26 @@
 package pro.developia.commerce.core;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+@Getter
 public enum Code {
-    SUCCESS(0, HttpStatus.OK, "success"),
-    CREATED(1, HttpStatus.CREATED, "success"),
-    BAD_REQUEST(2, HttpStatus.BAD_REQUEST, "bad_request"),
-    UNAUTHENTICATED(3, HttpStatus.UNAUTHORIZED, "unauthenticated"),
-    UNAUTHORIZED(4, HttpStatus.FORBIDDEN, "forbidden"),
-    NOT_FOUND(5, HttpStatus.NOT_FOUND, "not_found"),
-    INTERNAL_SERVER_ERROR(6, HttpStatus.INTERNAL_SERVER_ERROR, "internal_server_error"),
-    TIMEOUT(990, HttpStatus.REQUEST_TIMEOUT, "timeout");
+    SUCCESS("S000", HttpStatus.OK, "Success"),
+    CREATED("S001", HttpStatus.CREATED, "Created"),
+    BAD_REQUEST("E400", HttpStatus.BAD_REQUEST, "Bad request"),
+    UNAUTHENTICATED("E401", HttpStatus.UNAUTHORIZED, "Unauthenticated"),
+    UNAUTHORIZED("E403", HttpStatus.FORBIDDEN, "Forbidden"),
+    NOT_FOUND("E404", HttpStatus.NOT_FOUND, "Not found"),
+    TIMEOUT("E408", HttpStatus.REQUEST_TIMEOUT, "Timeout"),
+    INTERNAL_SERVER_ERROR("E500", HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
 
-    private Integer id;
-    private HttpStatus httpStatus;
-    private String message;
+    private final String code;
+    private final HttpStatus httpStatus;
+    private final String message;
 
-    Code(Integer id, HttpStatus httpStatus, String message) {
-        this.id = id;
+    Code(String code, HttpStatus httpStatus, String message) {
+        this.code = code;
         this.httpStatus = httpStatus;
         this.message = message;
-    }
-
-    public HttpStatus getHttpStatus() {
-        return httpStatus;
     }
 }

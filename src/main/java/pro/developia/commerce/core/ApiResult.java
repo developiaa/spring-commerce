@@ -16,17 +16,17 @@ public class ApiResult<T> {
 
     private ZonedDateTime time;
 
-    private Code code;
-
-    private T data;
+    private String code;
 
     private T message;
+
+    private T data;
 
     @JsonIgnore
     private HttpStatus httpStatus;
 
     public ApiResult<T> code(@NotNull Code code) {
-        this.code = code;
+        this.code = code.getCode();
         return this;
     }
 
