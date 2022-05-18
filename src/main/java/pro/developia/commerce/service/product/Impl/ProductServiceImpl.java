@@ -3,6 +3,8 @@ package pro.developia.commerce.service.product.Impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pro.developia.commerce.core.ApiException;
+import pro.developia.commerce.core.Code;
 import pro.developia.commerce.domain.product.Category;
 import pro.developia.commerce.domain.product.Product;
 import pro.developia.commerce.dto.request.product.ProductCreateRequest;
@@ -23,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     public void createProduct(ProductCreateRequest productCreateRequest) {
         // 카테고리 정보 조회
         Category category = categoryRepository.findById(productCreateRequest.getCategoryId())
-                .orElse(null);
+                .orElseThrow(() -> new ApiException(Code.BAD_REQUEST));
         // 상품 생성
         Product product = Product.createProduct(productCreateRequest, category);
         productRepository.save(product);

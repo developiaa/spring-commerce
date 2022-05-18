@@ -12,7 +12,10 @@ public enum Code {
     UNAUTHORIZED("E403", HttpStatus.FORBIDDEN, "Forbidden"),
     NOT_FOUND("E404", HttpStatus.NOT_FOUND, "Not found"),
     TIMEOUT("E408", HttpStatus.REQUEST_TIMEOUT, "Timeout"),
-    INTERNAL_SERVER_ERROR("E500", HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error");
+    INTERNAL_SERVER_ERROR("E500", HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
+
+    PRODUCT_OUT_OF_STOCK("E1000", HttpStatus.BAD_REQUEST, "상품 재고가 부족합니다."),
+    ;
 
     private final String code;
     private final HttpStatus httpStatus;

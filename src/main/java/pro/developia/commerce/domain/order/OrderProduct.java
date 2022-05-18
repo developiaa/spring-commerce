@@ -1,6 +1,7 @@
 package pro.developia.commerce.domain.order;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pro.developia.commerce.domain.product.Product;
@@ -22,8 +23,26 @@ public class OrderProduct {
     private Product product;
 
     // 주문 가격
-    private Integer price;
+    private Integer orderPrice;
 
     // 주문 수량
-    private Integer count;
+    private Integer orderCount;
+
+    @Builder
+    public OrderProduct(Product product, Integer orderPrice, Integer orderCount) {
+        this.product = product;
+        this.orderPrice = orderPrice;
+        this.orderCount = orderCount;
+    }
+
+    public static OrderProduct createOrderProduct(Product product, Integer orderPrice, Integer orderCount) {
+        OrderProduct orderProduct = OrderProduct.builder()
+                .product(product)
+                .orderPrice(orderPrice)
+                .orderCount(orderCount)
+                .build();
+
+        product.removeStock(orderCount);
+        return orderProduct;
+    }
 }

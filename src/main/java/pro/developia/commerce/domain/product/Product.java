@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pro.developia.commerce.core.ApiException;
+import pro.developia.commerce.core.Code;
 import pro.developia.commerce.domain.common.BaseTime;
 import pro.developia.commerce.dto.request.product.ProductCreateRequest;
 
@@ -63,4 +65,11 @@ public class Product extends BaseTime {
                 .build();
     }
 
+    public void removeStock(Integer orderCount) {
+        Integer stock = this.stock - orderCount;
+        if (stock < 0) {
+            throw new ApiException(Code.PRODUCT_OUT_OF_STOCK);
+        }
+        this.stock = stock;
+    }
 }
