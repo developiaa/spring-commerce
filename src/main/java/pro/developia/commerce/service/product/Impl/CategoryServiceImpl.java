@@ -13,8 +13,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public void createCategory(CategoryCreateRequest productCategoryCreateRequest) {
-        Category category = Category.createCategory(productCategoryCreateRequest);
+    public void createCategory(CategoryCreateRequest categoryCreateRequest) {
+        Category category = Category.createCategory(categoryCreateRequest);
         categoryRepository.save(category);
     }
 }
