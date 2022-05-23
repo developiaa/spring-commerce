@@ -8,10 +8,10 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     password: root
-    url: jdbc:mariadb://localhost:3306/commerce
+    url: jdbc:mariadb://localhost:3306/commerce-test
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     show-sql: true
 logging:
   level:

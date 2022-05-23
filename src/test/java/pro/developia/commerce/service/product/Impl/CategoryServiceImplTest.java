@@ -1,6 +1,7 @@
 package pro.developia.commerce.service.product.Impl;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pro.developia.commerce.domain.product.Category;
 import pro.developia.commerce.dto.request.product.CategoryCreateRequest;
 import pro.developia.commerce.repository.CategoryRepository;
+import pro.developia.commerce.service.product.CategoryService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,6 +20,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class CategoryServiceImplTest {
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    CategoryService categoryService;
 
     @Test
     @DisplayName("카테고리를 생성한다")
@@ -29,14 +34,12 @@ class CategoryServiceImplTest {
         categoryCreateRequest1.setName(name1);
         categoryCreateRequest2.setName(name2);
 
-        Category category1 = Category.createCategory(categoryCreateRequest1);
-        Category category2 = Category.createCategory(categoryCreateRequest2);
-        Category save1 = categoryRepository.save(category1);
-        Category save2 = categoryRepository.save(category2);
+        categoryService.createCategory(categoryCreateRequest1);
+        categoryService.createCategory(categoryCreateRequest2);
 
-        Category saveCategory1 = categoryRepository.findById(save1.getId())
+        Category saveCategory1 = categoryRepository.findById(1L)
                 .orElseThrow(RuntimeException::new);
-        Category saveCategory2 = categoryRepository.findById(save2.getId())
+        Category saveCategory2 = categoryRepository.findById(2L)
                 .orElseThrow(RuntimeException::new);
 
         assertThat(saveCategory1.getName()).isEqualTo(name1);
