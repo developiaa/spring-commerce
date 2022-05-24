@@ -14,7 +14,8 @@ public enum Code {
     TIMEOUT("E408", HttpStatus.REQUEST_TIMEOUT, "Timeout"),
     INTERNAL_SERVER_ERROR("E500", HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),
 
-    PRODUCT_OUT_OF_STOCK("E1000", HttpStatus.BAD_REQUEST, "상품 재고가 부족합니다."),
+    NOT_FOUND_USER_INFO("E1000", HttpStatus.BAD_REQUEST, "고객 정보를 찾을 수 없습니다."),
+    PRODUCT_OUT_OF_STOCK("E2000", HttpStatus.BAD_REQUEST, "상품 재고가 부족합니다."),
     ;
 
     private final String code;

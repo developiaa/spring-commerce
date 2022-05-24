@@ -34,7 +34,11 @@ public class Member extends BaseTime {
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")
-    private List<Orders> orders = new ArrayList<>();
+    private List<Orders> orders;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private List<Address> addresses;
 
     @Builder
     public Member(String name, String phone, Platform platform) {
