@@ -5,13 +5,21 @@ spring:
   application:
     name: commerce-api
   datasource:
-    driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mariadb://localhost:3306/commerce
+      master:
+        hikari:
+          username: root
+          password: root
+          driver-class-name: org.mariadb.jdbc.Driver
+          url: jdbc:mariadb://localhost:3306/commerce
+      slave:
+        hikari:
+          username: root
+          password: root
+          driver-class-name: org.mariadb.jdbc.Driver
+          url: jdbc:mariadb://localhost:3307/commerce
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     show-sql: true
 logging:
   level:
