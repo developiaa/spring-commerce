@@ -22,13 +22,13 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public void createProduct(ProductCreateRequest productCreateRequest) {
+    public Product createProduct(ProductCreateRequest productCreateRequest) {
         // 카테고리 정보 조회
         Category category = categoryRepository.findById(productCreateRequest.getCategoryId())
                 .orElseThrow(() -> new ApiException(Code.BAD_REQUEST));
         // 상품 생성
         Product product = Product.createProduct(productCreateRequest, category);
-        productRepository.save(product);
+        return productRepository.save(product);
     }
 
     @Override
