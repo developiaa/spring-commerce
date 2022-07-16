@@ -1,7 +1,6 @@
 package pro.developia.commerce.domain.order;
 
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 import pro.developia.commerce.domain.common.BaseTime;
 import pro.developia.commerce.domain.member.Member;
 
@@ -12,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Table(name = "orders")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Orders extends BaseTime {
 

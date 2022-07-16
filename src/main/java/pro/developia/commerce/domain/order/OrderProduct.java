@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
+@Table(name = "order_product")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class OrderProduct {
     @Id

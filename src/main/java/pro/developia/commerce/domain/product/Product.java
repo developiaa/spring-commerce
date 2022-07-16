@@ -11,11 +11,10 @@ import pro.developia.commerce.domain.common.BaseTime;
 import pro.developia.commerce.dto.request.product.ProductCreateRequest;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "product")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product extends BaseTime {
 

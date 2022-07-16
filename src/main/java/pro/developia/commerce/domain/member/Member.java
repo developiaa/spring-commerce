@@ -11,11 +11,11 @@ import pro.developia.commerce.domain.order.Orders;
 import pro.developia.commerce.dto.request.member.MemberCreateRequest;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseTime {
     @Id

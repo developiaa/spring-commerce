@@ -12,6 +12,7 @@ import java.util.List;
 
 @Getter
 @Entity
+@Table(name = "category")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category extends BaseTime {
     @Id
