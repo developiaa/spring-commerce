@@ -2,6 +2,14 @@ spring:
   config:
     activate:
       on-profile: local
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: commerce
+      username: developia
+      password:
+      authentication-database: admin
   application:
     name: commerce-api
   redis:
