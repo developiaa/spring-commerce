@@ -20,10 +20,10 @@ import javax.transaction.Transactional;
 @Slf4j
 @Transactional
 @SpringBootTest(properties = "spring.profiles.active:test")
-class ConfigControllerTest {
+class SystemControllerTest {
 
     @Autowired
-    ConfigController configController;
+    SystemController systemController;
 
     @Autowired
     ExceptionController exceptionController;
@@ -39,13 +39,13 @@ class ConfigControllerTest {
     @Value("${spring.application.name}")
     private String APPLICATION_NAME;
 
-    public static String API_URL = "/v1/api/config";
+    public static String API_URL = "/v1/api/system";
 
 
     @Test
     @DisplayName("서버가 어떤 환경으로 구동됐는지 확인한다.")
     public void checkProfile() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(configController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(systemController).build();
 
         mockMvc.perform(MockMvcRequestBuilders.get(API_URL + "/profiles-active"))
                 .andDo(MockMvcResultHandlers.print())
@@ -57,7 +57,7 @@ class ConfigControllerTest {
     @Test
     @DisplayName("애플리케이션의 이름을 반환한다.")
     public void checkApplicationName() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(configController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(systemController).build();
 
         mockMvc.perform(MockMvcRequestBuilders.get(API_URL + "/application-name"))
                 .andDo(MockMvcResultHandlers.print())

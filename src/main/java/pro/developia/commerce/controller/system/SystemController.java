@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("v1/api/config")
+@RequestMapping("v1/api/system")
 @RequiredArgsConstructor
 @RestController
-public class ConfigController {
+public class SystemController {
     @Value("${spring.profiles.active}")
     private String PROFILES_ACTIVE;
 
