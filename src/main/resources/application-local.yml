@@ -8,8 +8,8 @@ spring:
       port: 27017
       database: commerce
       username: developia
-      password:
-      authentication-database: admin
+      password: 
+      authentication-database: commerce
   application:
     name: commerce-api
   redis:
