@@ -24,7 +24,7 @@ import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "pro.developia.commerce"
+        basePackages = "pro.developia.commerce.repository"
 )
 @RequiredArgsConstructor
 public class DataSourceConfiguration {
