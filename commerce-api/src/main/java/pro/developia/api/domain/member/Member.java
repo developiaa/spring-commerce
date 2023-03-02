@@ -5,54 +5,96 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pro.developia.api.domain.common.BaseTime;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import pro.developia.api.domain.common.Platform;
 import pro.developia.api.domain.order.Orders;
 import pro.developia.api.dto.request.member.MemberCreateRequest;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Entity
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member extends BaseTime {
+public class Member extends pro.developia.core.domain.member.Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long getId() {
+        return super.getId();
+    }
 
     @Column(name = "name")
-    private String name;
+    public String getName() {
+        return super.getName();
+    }
 
     @Column(name = "nickName")
-    private String nickName;
+    public String getNickName() {
+        return super.getNickName();
+    }
 
     @Column(name = "email")
-    private String email;
+    public String getEmail() {
+        return super.getEmail();
+    }
 
     @Column(name = "phone")
-    private String phone;
+    public String getPhone() {
+        return super.getPhone();
+    }
 
     @Column(name="gender")
-    private Integer gender;
+    public Integer getGender() {
+        return super.getGender();
+    }
 
     @Column(name = "platform")
     @Enumerated(EnumType.STRING)
     private Platform platform;  // 가입한 플랫폼
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "member")
+    @Column(name = "created_at")
+    @CreatedDate
+    public LocalDateTime getCreatedAt() {
+        return super.getCreatedAt();
+    }
+
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    public LocalDateTime getUpdatedAt() {
+        return super.getUpdatedAt();
+    }
+
     private List<Orders> orders;
+
+    private List<Address> addresses;
 
     @JsonIgnore
     @OneToMany(mappedBy = "member")
-    private List<Address> addresses;
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 
     @Builder
     public Member(String name, String phone, Platform platform) {
-        this.name = name;
-        this.phone = phone;
+        super.setName(name);
+        super.setPhone(phone);
         this.platform = platform;
     }
 

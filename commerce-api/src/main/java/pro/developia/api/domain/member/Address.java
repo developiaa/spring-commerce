@@ -4,37 +4,70 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pro.developia.api.dto.request.member.AddressCreateRequest;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @Table(name = "address")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Address {
+public class Address extends pro.developia.core.domain.member.Address{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    public Long getId() {
+        return super.getId();
+    }
 
     @Column(name = "address")
-    private String address;
+    public String getAddress() {
+        return super.getAddress();
+    }
 
     @Column(name = "detail_address")
-    private String detailAddress;
+    public String getDetailAddress() {
+        return super.getDetailAddress();
+    }
 
     @Column(name = "zip_code")
-    private String zipCode;
+    public String getZipCode() {
+        return super.getZipCode();
+    }
+
+    @Column(name = "created_at")
+    @CreatedDate
+    public LocalDateTime getCreatedAt() {
+        return super.getCreatedAt();
+    }
+
+    @Column(name = "updated_at")
+    @LastModifiedDate
+    public LocalDateTime getUpdatedAt() {
+        return super.getUpdatedAt();
+    }
+
+    private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     @Builder
     public Address(String address, String detailAddress, String zipCode, Member member) {
-        this.address = address;
-        this.detailAddress = detailAddress;
-        this.zipCode = zipCode;
+        super.setAddress(address);
+        super.setDetailAddress(detailAddress);
+        super.setZipCode(zipCode);
         this.member = member;
     }
 
