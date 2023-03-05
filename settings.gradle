@@ -2,3 +2,4 @@ rootProject.name = 'commerce'
 
 include "commerce-core"
 include "commerce-api"
+include "commerce-admin-api"
