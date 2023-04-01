@@ -1,5 +1,9 @@
 rootProject.name = 'commerce'
 
+// 공통 모듈 계층
 include "commerce-core"
+// 도메인 모듈 계층
+include "order-domain"
+// 애플리케이션 모듈 계층
 include "commerce-api"
 include "commerce-admin-api"
