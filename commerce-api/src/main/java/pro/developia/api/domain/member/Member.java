@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import pro.developia.api.domain.common.Platform;
-import pro.developia.api.domain.order.Orders;
 import pro.developia.api.dto.request.member.MemberCreateRequest;
 
 import javax.persistence.*;
