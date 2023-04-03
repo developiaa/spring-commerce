@@ -4,16 +4,18 @@ import lombok.Builder;
 import lombok.Getter;
 import pro.developia.api.domain.product.ProductStatus;
 
+import java.math.BigDecimal;
+
 @Getter
 public class ProductCreateRequest {
     private String name;
     private Integer stock;
-    private Integer price;
+    private BigDecimal price;
     private ProductStatus status;
     private Long categoryId;
 
     @Builder
-    public ProductCreateRequest(String name, Integer stock, Integer price,
+    public ProductCreateRequest(String name, Integer stock, BigDecimal price,
                                 ProductStatus status, Long categoryId) {
         this.name = name;
         this.stock = stock;

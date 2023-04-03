@@ -11,6 +11,7 @@ import pro.developia.api.domain.common.BaseTime;
 import pro.developia.api.dto.request.product.ProductCreateRequest;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Getter
 @Entity
@@ -29,7 +30,7 @@ public class Product extends BaseTime {
     private Integer stock;
 
     @Column(name = "price")
-    private Integer price;
+    private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -44,7 +45,7 @@ public class Product extends BaseTime {
 //    private List<ProductCategory> productCategoryList = new ArrayList<>();
 
     @Builder
-    public Product(String name, Integer stock, Integer price, ProductStatus status,
+    public Product(String name, Integer stock, BigDecimal price, ProductStatus status,
                    Category category) {
         this.name = name;
         this.stock = stock;
