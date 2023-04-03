@@ -9,6 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import pro.developia.api.domain.common.Platform;
 import pro.developia.api.dto.request.member.MemberCreateRequest;
+import pro.developia.orderdomain.domain.Orders;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
