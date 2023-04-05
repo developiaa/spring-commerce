@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
                 product.getId(), orderCreateRequest.getTotalPrice(), orderCreateRequest.getCount());
 
         // 주문 생성
-        Orders order = Orders.createOrder(member, orderProduct);
+        Orders order = Orders.createOrder(member.getId(), orderProduct);
 
         // 주문 저장
         orderRepository.save(order);
