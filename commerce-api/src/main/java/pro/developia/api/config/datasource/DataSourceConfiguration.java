@@ -1,5 +1,6 @@
 package pro.developia.api.config.datasource;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +37,18 @@ public class DataSourceConfiguration {
     @Bean(MATER_DATASOURCE)
     @ConfigurationProperties(prefix = "spring.datasource.master.hikari")
     public DataSource masterDataSource() {
-        return DataSourceBuilder.create()
+        HikariConfig config = new HikariConfig();
+
+//        config.setJdbcUrl(dataSourceConfig.getUrl());
+//        config.setMinimumIdle();
+//        config.setMaximumPoolSize();
+//        config.setTransactionIsolation();
+//        config.setDriverClassName();
+//        config.setUsername();
+//        config.setPassword();
+
+        HikariDataSource hikariDataSource = new HikariDataSource(config);
+        return DataSourceBuilder.derivedFrom(hikariDataSource)
                 .type(HikariDataSource.class)
                 .build();
     }
